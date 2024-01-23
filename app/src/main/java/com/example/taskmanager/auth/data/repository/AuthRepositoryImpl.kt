@@ -32,4 +32,10 @@ class AuthRepositoryImpl(
             api.authenticate()
         }
     }
+
+    override suspend fun logout(): Result<Unit> {
+        return safeSuspendCall {
+            api.logout()
+        }
+    }
 }

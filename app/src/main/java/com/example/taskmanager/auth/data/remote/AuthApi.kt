@@ -21,4 +21,7 @@ interface AuthApi {
 
     @GET("authenticate")
     suspend fun authenticate()
+
+    @GET("logout")
+    suspend fun logout()
 }
