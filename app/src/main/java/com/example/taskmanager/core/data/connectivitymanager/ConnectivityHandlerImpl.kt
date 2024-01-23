@@ -6,8 +6,10 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import com.example.taskmanager.core.domain.connectivitymanager.ConnectionStatus
 import com.example.taskmanager.core.domain.connectivitymanager.ConnectivityHandler
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 class ConnectivityHandlerImpl(
@@ -52,6 +54,10 @@ class ConnectivityHandlerImpl(
                     launch { send(ConnectionStatus.Unavailable) }
                 }
             }
-        }
+            connectivityManager.registerDefaultNetworkCallback(callback)
+            awaitClose {
+                connectivityManager.unregisterNetworkCallback(callback)
+            }
+        }.distinctUntilChanged()
     }
 }
