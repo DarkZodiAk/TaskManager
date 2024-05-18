@@ -27,8 +27,8 @@ fun AppRoot(
         LocalSnackbarHostState provides localSnackbarHostState
     ) {
         LaunchedEffect(true){
-            viewModel.uiEvent.collect { errorMessage ->
-                localSnackbarHostState.showSnackbar(context.getString(errorMessage))
+            viewModel.uiEvent.collect { message ->
+                localSnackbarHostState.showSnackbar(context.getString(message))
             }
         }
 

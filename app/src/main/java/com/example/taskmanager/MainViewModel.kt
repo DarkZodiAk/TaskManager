@@ -16,16 +16,13 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import java.net.ConnectException
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val authEventBus: AuthEventBus,
     private val preferences: UserPreferences,
-    private val mainUseCases: MainUseCases
+    private val mainUseCases: MainUseCases,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(
@@ -45,34 +42,50 @@ class MainViewModel @Inject constructor(
 
         authEventBus.authBus.onEach { event ->
             when(event){
-                AuthEventBusEvent.LogIn -> {
+                AuthEventBusEvent.Login -> {
                     _state.update { it.copy(isLoggedIn = true) }
+                    login()
                 }
-                AuthEventBusEvent.LogOut -> logout()
+                AuthEventBusEvent.Logout -> {
+                    viewModelScope.launch {
+                        mainUseCases.logoutUseCase()
+                            .onSuccess { logout() }
+                            .onFailure { channel.send(R.string.logout_error) }
+                    }
+                }
                 AuthEventBusEvent.Unauthorized -> logout()
             }
         }.launchIn(viewModelScope)
     }
 
     private fun logout() {
-        _state.update { it.copy(isLoggedIn = false) }
-        preferences.clear()
+        viewModelScope.launch {
+            _state.update { it.copy(isLoggedIn = false) }
+            mainUseCases.clearDatabaseUseCase.invoke()
+            preferences.clear()
+        }
     }
 
     private fun validate() {
         viewModelScope.launch {
             mainUseCases.authenticateUseCase()
                 .onSuccess {
-
+                    authEventBus.sendEvent(AuthEventBusEvent.Login)
                 }
                 .onFailure { error ->
                     if(error is HttpException && error.code() == 401){
                         preferences.clear()
                         _state.update { it.copy(isLoggedIn = false, isLoading = false) }
                         channel.send(R.string.token_expired)
+                    } else {
+                        authEventBus.sendEvent(AuthEventBusEvent.Login)
                     }
-
                 }
         }
+    }
+
+    private fun login() {
+        mainUseCases.periodicLoadRecordsUseCase()
+        mainUseCases.periodicSyncRecordsUseCase()
     }
 }
