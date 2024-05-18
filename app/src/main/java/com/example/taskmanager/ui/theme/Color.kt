@@ -16,6 +16,7 @@ val DarkGray = Color(0xFF1D1B20)
 val LightRed = Color(0xFFFF6D6D)
 val LightGreen = Color(0xFF5CD0C0)
 val Light = Color(0xFFFFEDDF)
+val Green = Color(0xFF316A41)
 
 val ColorScheme.text : Color
     get() = DarkGray
@@ -27,3 +28,6 @@ val ColorScheme.highImportance : Color
     get() = LightRed
 val ColorScheme.lowImportance : Color
     get() = LightGreen
+
+val ColorScheme.Check : Color
+    get() = Green
