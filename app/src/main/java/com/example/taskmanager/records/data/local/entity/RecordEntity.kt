@@ -11,6 +11,5 @@ data class RecordEntity(
     val name: String,
     val description: String,
     val isTask: Boolean,
-    //val urgency: Urgency,
     val deadline: Long
 )

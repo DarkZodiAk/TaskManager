@@ -10,9 +10,7 @@ data class RecordDto(
     val name: String,
     val description: String,
     val isTask: Boolean,
-    //val urgency: String,
-    val deadline: Long,
-    //val tags: List<String>
+    val deadline: Long
 )
 
 fun RecordDto.toRecord(): RecordEntity {
@@ -22,7 +20,6 @@ fun RecordDto.toRecord(): RecordEntity {
         name,
         description,
         isTask,
-        //Urgency.valueOf(urgency),
         deadline
     )
 }
@@ -34,7 +31,6 @@ fun RecordEntity.toRecordDto(): RecordDto {
         name,
         description,
         isTask,
-        //urgency.toString(),
         deadline,
     )
 }
