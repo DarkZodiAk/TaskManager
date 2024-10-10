@@ -17,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.taskmanager.R
 import com.example.taskmanager.records.data.util.LocalDateTimeConverter
 import com.example.taskmanager.records.presentation.components.RecordCard
 import com.example.taskmanager.records.presentation.components.RecordsNavbar
@@ -55,7 +57,7 @@ fun RecordsScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add note",
+                    contentDescription = stringResource(id = R.string.add_note),
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
@@ -73,7 +75,6 @@ fun RecordsScreen(
                     title = record.name,
                     isChecked = record.isChecked,
                     isTask = record.isTask,
-                    //urgency = record.urgency,
                     deadline =
                         if(record.deadline > 0L) LocalDateTimeConverter.longToLocalDateTimeWithTimezone(record.deadline) else null,
                     onCheck = { viewModel.onEvent(RecordsEvent.CheckTask(record)) },

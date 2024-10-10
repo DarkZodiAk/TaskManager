@@ -20,7 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.example.taskmanager.records.data.util.string
+import com.example.taskmanager.records.presentation.string
 import com.example.taskmanager.ui.theme.body16
 import java.time.LocalDateTime
 

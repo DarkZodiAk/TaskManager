@@ -81,7 +81,6 @@ fun CalendarScreen(
                         title = record.name,
                         isChecked = record.isChecked,
                         isTask = record.isTask,
-                        //urgency = record.urgency,
                         deadline =
                             if(record.deadline > 0L) LocalDateTimeConverter.longToLocalDateTimeWithTimezone(record.deadline) else null,
                         onCheck = { viewModel.onEvent(CalendarEvent.CheckTask(record)) },

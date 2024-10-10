@@ -1,16 +1,12 @@
 package com.example.taskmanager.core.domain.usecase
 
-import com.example.taskmanager.records.data.local.RecordDatabase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.example.taskmanager.core.domain.repository.RecordRepository
 import javax.inject.Inject
 
 class ClearDatabaseUseCase @Inject constructor(
-    private val db: RecordDatabase
+    private val repository: RecordRepository
 ) {
     suspend operator fun invoke() {
-        withContext(Dispatchers.IO) {
-            db.clearAllTables()
-        }
+        repository.clearRecords()
     }
 }

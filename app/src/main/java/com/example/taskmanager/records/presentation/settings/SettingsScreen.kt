@@ -12,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.taskmanager.R
 import com.example.taskmanager.records.presentation.components.RecordsNavbar
 
 @Composable
@@ -39,12 +41,12 @@ fun SettingsScreen(
                 .padding(it)
                 .fillMaxSize()
         ) {
-            Text(text = "Имя: $name")
+            Text(text = stringResource(id = R.string.name_label) + ":$name")
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Почта: $email")
+            Text(text = stringResource(id = R.string.email_label) + ":$email")
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = { viewModel.logout() }) {
-                Text(text = "Выйти")
+                Text(text = stringResource(id = R.string.logout))
             }
         }
     }

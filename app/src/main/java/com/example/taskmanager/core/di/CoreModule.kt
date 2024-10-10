@@ -1,13 +1,21 @@
 package com.example.taskmanager.core.di
 
 import android.content.Context
+import androidx.room.Room
+import androidx.work.WorkManager
 import com.example.taskmanager.BuildConfig
 import com.example.taskmanager.core.data.connectivitymanager.ConnectivityHandlerImpl
 import com.example.taskmanager.core.data.interceptors.AuthTokenInterceptor
 import com.example.taskmanager.core.data.interceptors.UnauthorizedInterceptor
+import com.example.taskmanager.core.data.local.RecordDatabase
+import com.example.taskmanager.core.data.local.dao.ModifiedRecordDAO
+import com.example.taskmanager.core.data.local.dao.RecordDAO
+import com.example.taskmanager.core.data.repository.RecordRepositoryImpl
 import com.example.taskmanager.core.domain.connectivitymanager.ConnectivityHandler
 import com.example.taskmanager.core.domain.eventBus.AuthEventBus
 import com.example.taskmanager.core.domain.local.UserPreferences
+import com.example.taskmanager.core.domain.repository.RecordRepository
+import com.example.taskmanager.records.data.remote.RecordApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,7 +68,29 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun providesConnectivityHandler(@ApplicationContext context: Context): ConnectivityHandler {
-        return ConnectivityHandlerImpl(context)
+    fun providesRecordDatabase(@ApplicationContext context: Context): RecordDatabase {
+        return Room.databaseBuilder(
+            context,
+            RecordDatabase::class.java,
+            "record_db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesRecordDAO(recordDatabase: RecordDatabase): RecordDAO {
+        return recordDatabase.recordDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providesModifiedRecordDAO(recordDatabase: RecordDatabase): ModifiedRecordDAO {
+        return recordDatabase.modifiedRecordDAO()
+    }
+
+    @Provides
+    @Singleton
+    fun providesWorkManager(@ApplicationContext context: Context): WorkManager {
+        return WorkManager.getInstance(context)
     }
 }

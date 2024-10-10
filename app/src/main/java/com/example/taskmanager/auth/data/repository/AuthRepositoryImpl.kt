@@ -7,8 +7,9 @@ import com.example.taskmanager.auth.data.remote.request.RegisterRequest
 import com.example.taskmanager.auth.domain.repository.AuthRepository
 import com.example.taskmanager.core.data.remote.safeSuspendCall
 import com.example.taskmanager.core.domain.model.User
+import javax.inject.Inject
 
-class AuthRepositoryImpl(
+class AuthRepositoryImpl @Inject constructor(
     private val api: AuthApi
 ): AuthRepository {
     override suspend fun register(email: String, username: String, password: String): Result<Unit> {

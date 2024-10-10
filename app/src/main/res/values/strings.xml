@@ -18,4 +18,19 @@
     <string name="records">Записи</string>
     <string name="calendar">Календарь</string>
     <string name="settings">Настройки</string>
+    <string name="logout">Выйти</string>
+    <string name="next">Далее</string>
+    <string name="back">Назад</string>
+    <string name="save">Сохранить</string>
+    <string name="choose_date">Выбрать дату</string>
+    <string name="clear_date">Очистить дату</string>
+    <string name="other_options">Другие опции</string>
+    <string name="title">Заголовок</string>
+    <string name="convert_to_note">Преобразовать в заметку</string>
+    <string name="convert_to_task">Преобразовать в задачу</string>
+    <string name="delete">Удалить</string>
+    <string name="add_note">Добавить заметку</string>
+    <string name="yesterday">Вчера</string>
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
 </resources>

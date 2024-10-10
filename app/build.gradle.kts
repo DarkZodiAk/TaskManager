@@ -33,7 +33,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -87,9 +87,6 @@ dependencies {
     //Security
     implementation("androidx.security:security-crypto-ktx:1.1.0-alpha06")
 
-    //Async image load
-    implementation("io.coil-kt:coil-compose:2.5.0")
-
     //Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.50")
     kapt("com.google.dagger:hilt-android-compiler:2.50")
@@ -116,12 +113,5 @@ dependencies {
     //Time
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
-    //Testing
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("com.google.errorprone:error_prone_annotations:2.23.0")
 }

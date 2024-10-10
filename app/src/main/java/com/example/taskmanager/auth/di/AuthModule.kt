@@ -1,9 +1,6 @@
 package com.example.taskmanager.auth.di
 
-import com.example.taskmanager.auth.data.matcher.EmailMatcherImpl
-import com.example.taskmanager.auth.data.matcher.PasswordMatcherImpl
 import com.example.taskmanager.auth.data.remote.AuthApi
-import com.example.taskmanager.auth.data.repository.AuthRepositoryImpl
 import com.example.taskmanager.auth.domain.matcher.EmailMatcher
 import com.example.taskmanager.auth.domain.matcher.PasswordMatcher
 import com.example.taskmanager.auth.domain.repository.AuthRepository
@@ -31,26 +28,6 @@ object AuthModule {
         retrofit: Retrofit
     ): AuthApi {
         return retrofit.create(AuthApi::class.java)
-    }
-
-    @Provides
-    @ViewModelScoped
-    fun providesAuthRepository(
-        api: AuthApi
-    ): AuthRepository {
-        return AuthRepositoryImpl(api)
-    }
-
-    @Provides
-    @ViewModelScoped
-    fun providesPasswordMacher(): PasswordMatcher {
-        return PasswordMatcherImpl()
-    }
-
-    @Provides
-    @ViewModelScoped
-    fun providesEmailMatcher(): EmailMatcher {
-        return EmailMatcherImpl()
     }
 
     @Provides

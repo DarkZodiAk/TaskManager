@@ -1,6 +1,6 @@
 package com.example.taskmanager.records.domain.usecase
 
-import com.example.taskmanager.records.domain.worker.SyncRecordsRunner
+import com.example.taskmanager.core.domain.worker.SyncRecordsRunner
 import javax.inject.Inject
 
 class PeriodicSyncRecordsUseCase @Inject constructor(

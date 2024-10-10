@@ -32,14 +32,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.taskmanager.R
 import com.example.taskmanager.core.presentation.components.DefaultDropDownMenu
-import com.example.taskmanager.records.data.util.string
+import com.example.taskmanager.records.presentation.string
 import com.example.taskmanager.records.presentation.components.BasicTextFieldWithPlaceholder
 import com.example.taskmanager.records.presentation.editRecord.components.DateTimePickerDialog
 
@@ -75,7 +77,7 @@ fun EditRecordScreen(
                     if(state.isTask) {
                         Row {
                             Text(
-                                text = state.deadline?.string() ?: "Выбрать дату",
+                                text = state.deadline?.string() ?: stringResource(id = R.string.choose_date),
                                 color = MaterialTheme.colorScheme.secondary,
                                 modifier = Modifier.clickable {
                                     viewModel.onEvent(EditRecordEvent.OpenTimePickerDialog)
@@ -85,7 +87,7 @@ fun EditRecordScreen(
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Icon(
                                     imageVector = Icons.Default.Close,
-                                    contentDescription = "Очистить дату",
+                                    contentDescription = stringResource(id = R.string.clear_date),
                                     tint = MaterialTheme.colorScheme.secondary,
                                     modifier = Modifier.clickable {
                                         viewModel.onEvent(EditRecordEvent.ClearDeadline)
@@ -97,14 +99,14 @@ fun EditRecordScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = { viewModel.onEvent(EditRecordEvent.OnBack) }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(imageVector = Icons.Default.ArrowBack, stringResource(id = R.string.back))
                     }
                 },
                 actions = {
                     IconButton(onClick = { dropdownIsVisible = true }) {
                         Icon(
                             imageVector = Icons.Default.MoreVert,
-                            contentDescription = "Другие опции"
+                            contentDescription = stringResource(id = R.string.other_options)
                         )
                     }
                     if(dropdownIsVisible) {
@@ -149,7 +151,7 @@ fun EditRecordScreen(
                     ),
                     placeholder = {
                         Text(
-                            text = "Title",
+                            text = stringResource(id = R.string.title),
                             color = Color.Gray,
                             fontSize = 24.sp,
                             modifier = Modifier
@@ -181,6 +183,7 @@ fun EditRecordScreen(
     }
 }
 
+@Composable
 fun getDropdownActions(
     id: String,
     isTask: Boolean,
@@ -188,11 +191,11 @@ fun getDropdownActions(
     onDelete: () -> Unit
 ): HashMap<String, () -> Unit> {
     val result = hashMapOf(
-        (if(isTask) "Преобразовать в заметку" else "Преобразовать в задачу")
+        (if(isTask) stringResource(id = R.string.convert_to_note) else stringResource(id = R.string.convert_to_task))
                 to onChangeType
     )
     if(id.isNotBlank()) {
-        result.put("Удалить", onDelete)
+        result.put(stringResource(id = R.string.delete), onDelete)
     }
     return result
 }

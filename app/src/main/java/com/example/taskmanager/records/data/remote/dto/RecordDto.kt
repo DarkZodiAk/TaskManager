@@ -1,6 +1,6 @@
 package com.example.taskmanager.records.data.remote.dto
 
-import com.example.taskmanager.records.data.local.entity.RecordEntity
+import com.example.taskmanager.core.data.local.entity.RecordEntity
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)

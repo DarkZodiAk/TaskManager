@@ -21,7 +21,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.taskmanager.R
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -52,12 +54,12 @@ fun DateTimePickerDialog(
                             onClick = { isDatePickerOpen = false },
                             enabled = confirmEnabled
                         ) {
-                            Text(text = "Далее")
+                            Text(text = stringResource(id = R.string.next))
                         }
                     }
                     else {
                         OutlinedButton(onClick = { isDatePickerOpen = true }) {
-                            Text(text = "Назад")
+                            Text(text = stringResource(id = R.string.back))
                         }
                         Spacer(modifier = Modifier.width(4.dp))
                         Button(
@@ -72,7 +74,7 @@ fun DateTimePickerDialog(
                             },
                             enabled = confirmEnabled
                         ) {
-                            Text(text = "Сохранить")
+                            Text(text = stringResource(id = R.string.save))
                         }
                     }
                 }

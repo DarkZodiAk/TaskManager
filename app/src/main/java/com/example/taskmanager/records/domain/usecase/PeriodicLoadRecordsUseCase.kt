@@ -1,6 +1,6 @@
 package com.example.taskmanager.records.domain.usecase
 
-import com.example.taskmanager.records.domain.worker.LoadRecordsRunner
+import com.example.taskmanager.core.domain.worker.LoadRecordsRunner
 import javax.inject.Inject
 
 class PeriodicLoadRecordsUseCase @Inject constructor(

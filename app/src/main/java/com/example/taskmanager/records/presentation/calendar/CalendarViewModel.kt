@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.taskmanager.records.data.local.entity.RecordEntity
+import com.example.taskmanager.core.data.local.entity.RecordEntity
 import com.example.taskmanager.records.data.util.LocalDateTimeConverter
-import com.example.taskmanager.records.domain.repository.RecordRepository
+import com.example.taskmanager.core.domain.repository.RecordRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
